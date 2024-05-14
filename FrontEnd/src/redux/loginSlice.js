@@ -1,27 +1,34 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // localStorage par défaut
-import loginSlice from "../redux/loginSlice";
+import { createSlice } from "@reduxjs/toolkit";
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, loginSlice.reducer);
-
-export const mainStore = configureStore({
-  reducer: {
-    login: persistedReducer
+export const loginSlice = createSlice({
+  name: "login",
+  initialState: {
+    userToken: null,
+    userProfil: null,
   },
-    // Configuration du middleware pour éviter les avertissements de sérialisation
-    middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE", "persist/PAUSE", "persist/PURGE", "persist/REGISTER", "persist/FLUSH"],
-      },
-    }),
+  reducers: {
+    //Action pour connecter l'utilisateur
+    loginUser: (state, action) => {
+      state.userToken = action.payload; // Stockera les informations avec dispatch
+    },
+    // Action pour déconnecter l'utilisateur
+    logoutUser: (state) => {
+      state.userToken = null; // Remet a zéro les information user
+      state.userProfil = null;
+    },
+    //Action pour stoker les données utilisateur
+    infoUser: (state, action) => {
+      state.userProfil = action.payload; // Stockera les informations avec dispatch
+    },
+    //Action pour stoker les données utilisateur
+    infoUserName: (state, action) => {
+      console.log("voici le payload info user Name :", action.payload);
+      state.userProfil.userName = action.payload; // Stockera les informations avec dispatch
+    },
+  },
 });
 
+export const { loginUser, logoutUser, infoUser, infoUserName } =
+  loginSlice.actions;
 
-export const persistor = persistStore(mainStore);
+export default loginSlice;

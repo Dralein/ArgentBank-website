@@ -1,8 +1,7 @@
 import Features from "../Features";
 import iconchat from "../../assets/img/icon-chat.webp";
 import iconmoney from "../../assets/img/icon-money.webp";
-import iconsecurity from "../../assets/img/icon-security.webp"
-
+import iconsecurity from "../../assets/img/icon-security.webp";
 
 const home = () => {
   return (

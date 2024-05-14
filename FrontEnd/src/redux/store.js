@@ -1,21 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import loginSlice from "../redux/loginSlice"; // Assurez-vous du bon chemin d'accès
 
-const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    userToken: null,
-    userProfil: null,
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, loginSlice.reducer);
+
+export const store = configureStore({
+  reducer: {
+    login: persistedReducer,
   },
-  reducers: {
-    loginUser: (state, action) => {
-      state.userToken = action.payload;
-    },
-    logoutUser: (state) => {
-      state.userToken = null; 
-      state.userProfil= null;
-    },
-  },
+  // Configuration du middleware pour éviter les avertissements de sérialisation
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/PAUSE",
+          "persist/PURGE",
+          "persist/REGISTER",
+          "persist/FLUSH",
+        ],
+      },
+    }),
 });
 
-export const { loginUser, logoutUser } = authSlice.actions;
-export default authSlice.reducer;
+export const persistor = persistStore(store);
