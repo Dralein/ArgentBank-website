@@ -1,17 +1,11 @@
-import { useNavigate } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import Accounts from "../../data/account.json";
 import Account from "../Account";
-import Button from "../Button";
+import EditName from "../Edit";
 
 const User = () => {
   const username = useSelector((state) => state.login.userProfil.userName);
-  const navigate = useNavigate();
-
-  const handleDisplayEdit = (e) => {
-    e.preventDefault();
-    navigate("/edit-profile");
-  };
 
   return (
     <main className="main bg-dark">
@@ -19,11 +13,7 @@ const User = () => {
         <h1>
           Welcome back <br /> {username}!
         </h1>
-        <Button
-          className="edit-button"
-          text="Edit Name"
-          onClick={handleDisplayEdit}
-        />
+        <EditName/>
       </div>
       <h2 className="sr-only">Accounts</h2>
       {Accounts.map((account, index) => (
