@@ -375,6 +375,10 @@ definitions:
       note:
         type: string
         description: Transaction note
+  TransactionList:
+    type: array
+    items:
+      $ref: '#/definitions/Transaction'    
   TransactionCategory:
     type: string
     enum:
