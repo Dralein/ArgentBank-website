@@ -238,24 +238,24 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Modifier la catégorie d'une transaction
-      description: API permettant de mettre à jour la catégorie d'une transaction spécifique
+      summary: Modify transaction category
+      description: API for updating the category of a specific transaction
       parameters:
         - in: path
           name: id
-          description: ID de la transaction à mettre à jour
+          description: ID of the transaction to be updated
           required: true
           type: string
         - in: body
           name: body
-          description: Payload de mise à jour de la catégorie de la transaction
+          description: Transaction category update payload
           required: true
           schema:
             type: object
             properties:
               category:
                 type: string
-                description: Nouvelle catégorie de la transaction
+                description: New transaction category
                 enum:
                   - Food
                   - Shopping
@@ -267,13 +267,13 @@ paths:
         - application/json
       responses:
         '200':
-          description: Catégorie de la transaction mise à jour avec succès
+          description: Transaction category successfully updated
           schema:
             $ref: '#/definitions/Transaction'
         '400':
-          description: Champs invalides
+          description: Unauthorized
         '404':
-          description: Transaction non trouvée
+          description: Transaction not found
         '500':
           description: Internal Server Error
   /transactions/{id}/note:
@@ -282,31 +282,31 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Ajouter une note à une transaction
-      description: API permettant d'ajouter une note à une transaction spécifique
+      summary: Adding a note to a transaction
+      description: API for adding a note to a specific transaction
       parameters:
         - in: path
           name: id
-          description: ID de la transaction à mettre à jour
+          description: ID of the transaction to be updated
           required: true
           type: string
         - in: body
           name: body
-          description: Payload d'ajout de note à la transaction
+          description: Payload for adding a note to the transaction
           required: true
           schema:
-            $ref: '#/definitions/TransactionNoteUpdate'
+            $ref: '#/definitions/TransactionNote'
       produces:
         - application/json
       responses:
         '200':
-          description: Note de la transaction ajoutée avec succès
+          description: Transaction deleted successfully
           schema:
             $ref: '#/definitions/Transaction'
         '400':
-          description: Champs invalides
+          description: Unauthorized
         '404':
-          description: Transaction non trouvée
+          description: Transaction not found
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -384,11 +384,11 @@ definitions:
       - Health
       - Transportation
       - Other
-  TransactionNoteUpdate:
+  TransactionNote:
     type: object
     properties:
       note:
         type: string
-        description: Nouvelle note à ajouter à la transaction
+        description: New note to add to the transaction
 
 
