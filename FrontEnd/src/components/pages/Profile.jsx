@@ -11,10 +11,10 @@ const User = () => {
     <main className="main bg-dark">
       <div className="header">
         <h1>
-          Welcome back <br /> {username}!
+          Welcome back <br /> {username} !
         </h1>
+        </div>
         <EditName/>
-      </div>
       <h2 className="sr-only">Accounts</h2>
       {Accounts.map((account, index) => (
         <Account

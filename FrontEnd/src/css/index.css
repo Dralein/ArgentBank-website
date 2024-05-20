@@ -19,8 +19,13 @@ body {
 
 .bg-dark {
   background-color: #12002b;
+  height: 85vh;
+  padding-top: 48px;
 }
 
+h1 {
+  margin-top: 0px;
+}
 
 .sr-only {
   border: 0 !important;
@@ -55,6 +60,16 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+}
+
+.userprofile {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  display: flex;
+  align-items: center;
 }
 
 .main-nav-item:hover {
@@ -170,12 +185,18 @@ body {
   color: #fff;
 }
 
+button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-bottom: 32px;
   padding: 2rem;
 }
 
@@ -251,6 +272,10 @@ body {
   font-weight: normal;
 }
 
+.loginh1 {
+  margin-top: 25px;
+}
+
 .account-content-wrapper {
   width: 100%;
   flex: 1;
@@ -262,6 +287,7 @@ body {
   color: #fff;
   font-weight: bold;
   padding: 10px;
+  margin-bottom: 32px;
 }
 
 .header {

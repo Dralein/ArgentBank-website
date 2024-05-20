@@ -32,12 +32,12 @@ const Header = () => {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </NavLink>
-        <div>
+        <div className="userprofile">
           {loginStore &&
             loginStore.userProfil &&
             loginStore.userProfil.userName && (
-              <Link to="/profile" className="userName">
-                <i className="fa fa-user-circle"></i>
+              <Link to="/profile" className="main-nav-item username">
+                <i className="fa fa-user-circle gap5"></i>
                 <p>{loginStore.userProfil.userName}</p>
               </Link>
             )}
@@ -46,6 +46,7 @@ const Header = () => {
               className="main-nav-item"
               to="/"
               onClick={handleRedirectHome}>
+                <i className="fa fa-sign-out gap5"></i>
               Sign Out
             </NavLink>
           ) : (

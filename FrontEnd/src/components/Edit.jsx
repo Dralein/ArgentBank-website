@@ -47,7 +47,7 @@ const EditName = () => {
         />
       )}
       {showEditName && (
-        <section className="sign-in-content">
+        <section className="sign-in-content editmargin">
           <h1>Edit User info</h1>
           <form onSubmit={handleFormSubmit}>
             <div className="input-wrapper">
