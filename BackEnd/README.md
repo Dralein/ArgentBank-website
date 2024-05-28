@@ -56,7 +56,7 @@ Once you run the `populate-db` script, you should have two users in your databas
 
 - First Name: `Steve`,
 - Last Name: `Rogers`,
-  - Email: `steve@rogers.com`,
+- Email: `steve@rogers.com`,
 - Password: `password456`
 
 ## API Documentation

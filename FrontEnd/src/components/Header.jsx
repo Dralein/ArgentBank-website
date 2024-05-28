@@ -7,18 +7,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const loginStore = useSelector((state) => state.login);
   const token = useSelector((state) => state.login.userToken);
-  if (token) {
-    console.log(
-      "le token est présent dans le store donc je change Sign In en Sing out",
-      token
-    );
-  } else {
-    console.log("le token n'est pas présent donc je laisse Sign IN");
-  }
+
   // Au click sur logout suppression du token du local storage
   const handleRedirectHome = () => {
     localStorage.removeItem("token");
-    console.log("Token supprimé du local storage");
     dispatch(logoutUser());
   };
   return (
