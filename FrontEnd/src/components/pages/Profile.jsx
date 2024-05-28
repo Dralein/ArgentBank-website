@@ -1,20 +1,24 @@
-
 import { useSelector } from "react-redux";
 import Accounts from "../../data/account.json";
 import Account from "../Account";
 import EditName from "../Edit";
 
+
 const User = () => {
-  const username = useSelector((state) => state.login.userProfil.userName);
+  const { userProfil, loading } = useSelector((state) => state.login);
+
+  if (loading) {
+
+    return <div>Loading...</div>; // Render a loading indicator or a fallback message
+
+  }
 
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back <br /> {username} !
-        </h1>
-        </div>
-        <EditName/>
+      <h1>Welcome back <br /> {userProfil.userName}!</h1>
+      </div>
+      <EditName />
       <h2 className="sr-only">Accounts</h2>
       {Accounts.map((account, index) => (
         <Account

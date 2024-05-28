@@ -270,6 +270,10 @@ button:hover {
   font-size: 400px;
 }
 
+.error-connection {
+  color: red;
+}
+
 .account-title {
   margin: 0;
   padding: 0;

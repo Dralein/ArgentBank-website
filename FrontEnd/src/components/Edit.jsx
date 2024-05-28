@@ -20,15 +20,9 @@ const EditName = () => {
       const updateUserName = await changeUsername(newUserName, userToken);
       if (updateUserName.status === 200) {
         dispatch(infoUserName(newUserName));
-        console.log("Le nom d'utilisateur a bien été modifié.", updateUserName.status);
-      } else {
-        console.error("La mise à jour du nom d'utilisateur a échoué.");
       }
     } catch (error) {
-      console.error(
-        "Une erreur s'est produite lors de la mise à jour du nom d'utilisateur :",
-        error
-      );
+      error
     }
     setShowEditName(false); // Masquer la section d'édition après avoir sauvegardé
   };

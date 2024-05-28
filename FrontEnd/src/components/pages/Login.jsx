@@ -44,8 +44,7 @@ const Login = () => {
 
       // Redirection vers la page utilisateur après la connexion réussie
       navigate("/profile");
-    } catch (error) {
-      console.error("Erreur lors de la connexion:", error);
+    }  catch (error) {
       setError("Identifiants incorrects");
     }
   };
