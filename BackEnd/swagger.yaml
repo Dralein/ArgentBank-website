@@ -115,8 +115,51 @@ paths:
           description: Invalid fields
         '500':
           description: Internal server error
+  
+  /accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: List of accounts
+      description: API to list account for a specific user
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
 
-  /transactions/{userId}/{accountId}:
+  /category:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: List of category
+      description: API to list category
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Categories retrieved successfully
+          schema:
+            items:
+              $ref: '#/definitions/TransactionCategory'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  
+  
+    
+  /accounts/{accountId}/transactions:
     get:
       security:
         - Bearer: []
@@ -125,16 +168,6 @@ paths:
       summary: List Transactions
       description: API to list transactions for a specific user and account
       parameters:
-        - in: header
-          name: Authorization
-          type: string
-          description: Bearer JWT token
-          required: true
-        - in: path
-          name: userId
-          type: string
-          description: User ID
-          required: true
         - in: path
           name: accountId
           type: string
@@ -152,32 +185,22 @@ paths:
           description: Transactions retrieved successfully
           schema:
             $ref: '#/definitions/TransactionsResponse'
-        '400':
-          description: Invalid fields
+        '401':
+          description: Unauthorized
         '404':
-          description: Invalid user ID or account ID
+          description: Invalid account ID
         '500':
           description: Internal server error
 
-  /transactions/{userId}/{accountId}/{transactionId}:
+  /accounts/{accountId}/transactions/{transactionId}:
     get:
       security:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Get Transaction
+      summary: Get Transaction by ID
       description: API to get a specific transaction
       parameters:
-        - in: header
-          name: Authorization
-          type: string
-          description: Bearer JWT token
-          required: true
-        - in: path
-          name: userId
-          type: string
-          description: User ID
-          required: true
         - in: path
           name: accountId
           type: string
@@ -195,10 +218,10 @@ paths:
           description: Transaction retrieved successfully
           schema:
             $ref: '#/definitions/Transaction'
-        '400':
-          description: Invalid fields
+        '401':
+          description: Unauthorized
         '404':
-          description: Invalid user ID, account ID, or transaction ID
+          description: Invalid account ID, or transaction ID
         '500':
           description: Internal server error
 
@@ -210,16 +233,6 @@ paths:
       summary: Modify Transaction
       description: API to modify a transaction's note or category. If set to an empty string, it can be considered as deleted.
       parameters:
-        - in: header
-          name: Authorization
-          type: string
-          description: Bearer JWT token
-          required: true
-        - in: path
-          name: userId
-          type: string
-          description: User ID
-          required: true
         - in: path
           name: accountId
           type: string
@@ -243,12 +256,13 @@ paths:
           description: Transaction modified successfully
           schema:
             $ref: '#/definitions/Transaction'
-        '400':
-          description: Invalid fields
+        '401':
+          description: Unauthorized
         '404':
-          description: Invalid user ID, account ID, or transaction ID
+          description: Invalid account ID, or transaction ID
         '500':
           description: Internal server error
+
 
 securityDefinitions:
   Bearer:
@@ -313,16 +327,6 @@ definitions:
         type: string
 
   TransactionsResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          transactions:
             type: array
             description: Array of transactions
             items:
@@ -332,8 +336,6 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-      userId:
         type: string
       date:
         type: string
@@ -359,4 +361,12 @@ definitions:
       notes:
         type: string
 
-
+  TransactionCategory:
+    type: string
+    enum:
+      - Food
+      - Shopping
+      - Entertainment
+      - Health
+      - Transportation
+      - Other
